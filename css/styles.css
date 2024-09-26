@@ -23,21 +23,27 @@ body {
     background-color: var(--clr-black);
     
 }
-
-.background{
-    margin-bottom: 0.5em;
-    margin-left: 30%;
-    text-align: left;
+@keyframes typing {
+    from { width: 0; visibility: visible; }
+    to { width: 85ch; visibility: visible;} 
 }
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--clr-bright-green); }
+}
+
 .line {
-    display: block;
+    animation: typing 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+    animation-fill-mode: forwards;
+    display: inline-block;
     overflow: hidden;
     white-space: nowrap;
     border-right: 0.15em solid var(--clr-bright-green);
-    width:0;
-    animation: typing 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
-    animation-fill-mode: forwards;
+    width: 85ch; 
+    visibility: hidden; 
 }
+
 .line:nth-of-type(1) {
     animation-delay: 4s;
 }
@@ -53,7 +59,17 @@ body {
 .line:nth-of-type(5) {
     animation-delay: 20s;
 }
-
+main {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    width:80%;
+    display:flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-self: center;
+}
 
 header{
     background-image: url('../images/hacker2.jpg');
@@ -96,11 +112,9 @@ nav ul li a {
     text-align: center;
     background-position: center;
 }
-.project-list{
-    margin-left: 30%;
-}
 
-.hero, .about, .contact {
+
+.hero, .about, .contact, .background, .project-list {
     padding: 2em;
     margin: 1em auto;
     max-width: 800px;
@@ -151,11 +165,49 @@ nav ul li a {
     color: var(--clr-black);
 }
 img {
-    width: 400px; 
+    width: 60%; 
     height: auto; 
     display: block; 
     margin-top: 2rem;
 
+}
+.project {
+
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+@media(min-width:400px){
+    main{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+    .project:first-child{
+        grid-column: span ;
+    }
+    .project:nth-child(4){
+        grid-column: span 2;
+    }
+    .project:nth-child(5){
+        grid-column: span 3;
+    }
+}
+@media(min-width:900px){
+    main{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+    .project:first-child{
+        grid-column: span 2;
+    }
+    .project:nth-child(4){
+        grid-column: span 2;
+    }
+    .project:nth-child(5){
+        grid-column: span 3;
+    }
 }
 #dogfooter{
     width: 10%; 
@@ -163,13 +215,4 @@ img {
     display: block; 
     margin: 0 auto;
 
-}
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--clr-bright-green); }
 }
